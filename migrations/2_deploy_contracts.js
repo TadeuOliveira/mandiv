@@ -1,5 +1,5 @@
-var Adoption = artifacts.require("Adoption");
+var Mandiv = artifacts.require("Mandiv");
 
 module.exports = function(deployer) {
-  deployer.deploy(Adoption);
+  deployer.deploy(Mandiv);
 };

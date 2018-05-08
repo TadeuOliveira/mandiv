@@ -1,0 +1,1 @@
+Mandiv.deployed().then(function(x){ app = x })
