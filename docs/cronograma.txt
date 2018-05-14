@@ -1,0 +1,17 @@
+MAIO - BACK-END
+
+07-13: funcões de usuário
+14-20: estrutura de viagem e funções do motorista
+21-27: funções de passageiro
+28-03: IPFS
+
+JUNHO - FRONT-END
+
+04-10: definir eventos
+11-17: google maps api rotas
+18-24: google maps api viagem
+25-01: finalizar estilo
+
+JULHO - VERSÃO 1.0
+*state channels
+*desvios

@@ -1,1 +1,2 @@
 Mandiv.deployed().then(function(x){ app = x })
+app.usuarios("0xd1284f3dc44006bb752cc1c164c06e47f599e125")
