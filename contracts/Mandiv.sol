@@ -2,10 +2,12 @@ pragma solidity ^0.4.17;
 
 contract Mandiv{
 
-  //structs
+  //*****STRUCTS
+
   struct Usuario{
     string nome;
     string username;
+    address sender;
     bool motorista;
     uint avaliacao;
     string endereco;
@@ -14,8 +16,8 @@ contract Mandiv{
 
   struct Motorista{
     //fotos ipfs
+    address sender;
     uint avaliacao;
-    uint timestamp; //converter para date com js
     bool ativo;
   }
 
@@ -42,14 +44,27 @@ contract Mandiv{
     uint timestamp;
   }
 
-  struct HistoricoViagens{
-    Viagem[] viagens;
+  struct HistoricoViagem{
+    mapping(address=>uint) avaliacoes;
+    Viagem viagem;
   }
 
-  //*****VARIAVEIS
+  struct Passageiro{
+    address sender;
+    mapping(uint=>HistoricoViagem) historico;
+    mapping(uint=>Convite) convites;
+  }
+
+  struct Convite{
+    address passageiro;
+    uint timestamp;
+  }
+
+  //*****VARIAVEIS DE ESTADO
+
   mapping(address=>Usuario) public usuarios;
   mapping(address=>Motorista) public motoristas;
-  mapping(address=>HistoricoViagens) public viagens;
+  //mapping(address=>Usuario) public passageiros;
 
   //*****EVENTOS
 
@@ -60,9 +75,9 @@ contract Mandiv{
   function cadastrar(string _nome, string _username, bool _motorista) public {
     require(usuarios[msg.sender].ativo == false);
     if(_motorista){
-      motoristas[msg.sender] = Motorista(1000,now,true);
+      motoristas[msg.sender] = Motorista(msg.sender,1000,true);
     }
-    usuarios[msg.sender] = Usuario(_nome,_username,_motorista,100,"",true);
+    usuarios[msg.sender] = Usuario(_nome,_username,msg.sender,_motorista,100,"",true);
   }
 
   function deletarConta() public {
@@ -87,7 +102,13 @@ contract Mandiv{
        return keccak256(a) == keccak256(b);
    }
 
-   function getSender() public constant returns(address) {
+  function getSender() public constant returns(address) {
     return msg.sender;
    }
+
+  function enviarConvite(address _motorista) public{
+    require(motoristas[_motorista].ativo);
+
+  }
+
 }
